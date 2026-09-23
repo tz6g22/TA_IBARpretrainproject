@@ -1,0 +1,61 @@
+seed: 42
+tokenizer_path: shared/tokenizer/qwen3
+model:
+  num_hidden_layers: 12
+  hidden_size: 448
+  intermediate_size: 1344
+  num_attention_heads: 8
+  num_key_value_heads: 2
+  max_position_embeddings: 4096
+optimizer:
+  backbone_lr: 3.0e-4
+  query_lr: 3.0e-4
+  rmsnorm_lr: 3.0e-4
+  backbone_weight_decay: 0.1
+  betas: [0.9, 0.95]
+  eps: 1.0e-8
+task_optimizer:
+  backbone_lr: 5.0e-5
+  query_lr: 1.0e-4
+  rmsnorm_lr: 1.0e-4
+  backbone_weight_decay: 0.1
+  betas: [0.9, 0.95]
+  eps: 1.0e-8
+pretrain:
+  steps: 2500
+  seq_len: 2048
+  micro_batch_per_gpu: 2
+  gradient_accumulation: 8
+  warmup_steps: 125
+  min_lr: 3.0e-5
+  grad_clip: 1.0
+  validation_interval_steps: 250
+  checkpoint_interval_steps: 500
+task_training:
+  token_budget: 350000
+  seq_len: 2048
+  micro_batch_per_gpu: 2
+  gradient_accumulation: 8
+  warmup_ratio: 0.03
+  min_lr: 0.0
+  grad_clip: 1.0
+  validation_interval_steps: 100
+  checkpoint_interval_steps: 250
+fineweb:
+  dataset: HuggingFaceFW/fineweb
+  subset: sample-10BT
+  seq_len: 2048
+  train_tokens: shared/data/fineweb_train_tokens.npy
+  val_tokens: shared/data/fineweb_val_tokens.npy
+  train_manifest: shared/manifests/fineweb_train_manifest.json
+  val_manifest: shared/manifests/fineweb_val_manifest.json
+  validation_tokens: 524288
+task_data:
+  math:
+    train: shared/data/math_train.jsonl
+    validation: shared/data/math_validation.jsonl
+    discovery: shared/data/math_discovery.jsonl
+  multihop:
+    train: shared/data/multihop_train.jsonl
+    validation: shared/data/multihop_validation.jsonl
+    discovery: shared/data/multihop_discovery.jsonl

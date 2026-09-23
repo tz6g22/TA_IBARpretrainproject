@@ -1,0 +1,13 @@
+{
+  "dataset": "HuggingFaceFW/fineweb",
+  "documents": "/iridisfs/scratch/tz6g22/kimi/TA_IBARpretrainproject/shared/manifests/fineweb_val_documents.jsonl",
+  "documents_sha256": "7b20e8e9f126fd6c3ba2da4175a11910c97157d9ec27a8a6c770e1f8dbfe172c",
+  "ordering": "stream.shuffle(seed=42, buffer_size=10000)",
+  "seed": 42,
+  "split_rule": "sha256(document_id + newline + text) modulo 20",
+  "subset": "sample-10BT",
+  "token_stream": "/iridisfs/scratch/tz6g22/kimi/TA_IBARpretrainproject/shared/data/fineweb_val_tokens.npy",
+  "token_stream_sha256": "3edf0e04cec5b3cc6b0e7ad18431cc3f1052740784cdc603bdda608c00270113",
+  "tokenizer": "shared/tokenizer/qwen3",
+  "tokens": 524288
+}
